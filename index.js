@@ -1,10 +1,9 @@
 const express = require("express");
-
+// const router = express.Router();
 const app = express();
 
 const PORT =  process.env.PORT || 3000;
 
-const members = require("./Members");
 app.get("/",(req,res)=>{
     res.send(`<h1>Hello world!!!!!!</h1>`)
 })
@@ -16,18 +15,6 @@ app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 //     "dev": "nodemon index"
 //   }
 
-// get all members
-app.get("/api/members", (req, res) => {
-    res.json(members);
-})
+app.use("/api/members", require("./routes/api/members"))
 
-// get single member
-
-app.get("/api/members/:id", (req,res) => {
-    const found = members.some(member => member.id === parseInt(req.params.id));
-    if(found){
-        res.json(members.filter(member =>  member.id === parseInt(req.params.id)))
-    }else {
-        res.status(400).json({ msg: `No member with the id of ${req.params.id}`});
-    } 
-})
+// module.exports = router;
