@@ -1,5 +1,8 @@
 const express = require("express");
 const app = express();
+const exphbs = require("express-handlebars")
+const members = require("./Members");
+
 
 const PORT =  process.env.PORT || 3000;
 
@@ -7,11 +10,20 @@ const PORT =  process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Handlebars Middleware
+app.engine("handlebars", exphbs());
+app.set("view engine", "handlebars");
 
 
-app.get("/",(req,res)=>{
-    res.send(`<h1>Hello world!!!!!!</h1>`)
-})
+// HomePage routes
+app.get("/", (req,res) => res.render("index", {
+    title:"Member App",
+    members
+}))
+
+// app.get("/",(req,res)=>{
+//     res.send(`<h1>Hello world!!!!!!</h1>`)
+// })
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
 
@@ -32,3 +44,5 @@ app.use("/api/members", require("./routes/api/members"))
 
 // generate unique id 
 // npm i uuid
+
+// npm install express-handlebars

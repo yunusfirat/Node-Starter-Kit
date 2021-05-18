@@ -34,7 +34,8 @@ router.post("/", (req, res) => {
         return res.status(400).json({ msg: "please make sure that you have added name and email."})
     }
     members.push(newMember);
-    res.json(members)
+    // res.json(members)
+    res.redirect("/");
 })
 
 
