@@ -28,7 +28,7 @@ app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
 
 app.use("/api/members", require("./routes/api/members"))
-
+//  npx express-generator-api   
 
 
 // npm init
